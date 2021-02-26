@@ -10,10 +10,10 @@ class Resources:
         return os.getcwd() + "/res"
 
     @staticmethod
-    def getLibPath():
+    def getLibPath(path):
         if sys.platform in 'win32':
-            return os.getcwd() + "\\lib"
-        return os.getcwd() + "/lib"
+            return os.getcwd() + "\\lib\\" + path
+        return os.getcwd() + "/lib" + path
 
     @staticmethod
     def getResourcesPath(path):

@@ -38,8 +38,8 @@ class HelpMenu(QMenu):
             '''
         )
         pros = self.app.strings.properties
-        self.feedbackAction.setText(pros["systemTrayIconContextMenu.feedback"])
-        self.aboutAction.setText(pros["systemTrayIconContextMenu.about"])
+        self.feedbackAction.setText(pros["feedback"])
+        self.aboutAction.setText(pros["about"])
         self.aboutAction.triggered.connect(self.aboutActionTriggered)
         self.feedbackAction.triggered.connect(self.feedbackActionTriggered)
 

@@ -21,7 +21,7 @@ class GuiConfig:
 
     def writeNewJsonFile(self, key, file):
         value = self.guiConfig[key]
-        with open(self.configPath, 'w', encoding="utf-8") as guiConfig:
+        with open(Resources.getConfigPath(file), 'w', encoding="utf-8") as guiConfig:
             json.dump(value, guiConfig, ensure_ascii=False)
         return
 

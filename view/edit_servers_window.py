@@ -98,6 +98,7 @@ class EditServersWindow(QMainWindow):
                 print(f"Delete {self.app.guiConfig.guiConfig['serverList'][selectedIndex]}")
                 del self.app.guiConfig.guiConfig['serverList'][selectedIndex]
                 self.app.guiConfig.write()
+                self.app.systemTrayIconContextMenu.reloadServer()
             self.ui.listWidget.takeItem(selectedIndex)
             selectedIndex = self.ui.listWidget.currentIndex().row()
 
@@ -105,6 +106,7 @@ class EditServersWindow(QMainWindow):
                 self.setServer(self.app.guiConfig.guiConfig['serverList'][selectedIndex])
                 return
             self.setServer(None)
+
 
     # 做一个输入监听否则一刷新就没了
     def listWidgetItemClicked(self):
@@ -134,6 +136,7 @@ class EditServersWindow(QMainWindow):
             return self.saveTrojanServer()
         elif protocol in 'Socks':
             return self.saveSocksServer()
+        self.app.systemTrayIconContextMenu.reloadServer()
         print("save....")
 
     def reset(self):
@@ -436,6 +439,7 @@ class EditServersWindow(QMainWindow):
         else:
             self.guiConfig.guiConfig['serverList'][self.ui.listWidget.currentIndex().row()] = self.vmessServer
         self.guiConfig.write()
+        self.app.systemTrayIconContextMenu.reloadServer()
         print("save " + str(self.vmessServer))
         self.vmessServer = {}
         return True
@@ -503,6 +507,7 @@ class EditServersWindow(QMainWindow):
         else:
             self.guiConfig.guiConfig['serverList'][self.ui.listWidget.currentIndex().row()] = self.vlessServer
         self.guiConfig.write()
+        self.app.systemTrayIconContextMenu.reloadServer()
         print("save " + str(self.vlessServer))
         self.vlessServer = {}
         return True
@@ -553,6 +558,7 @@ class EditServersWindow(QMainWindow):
         else:
             self.guiConfig.guiConfig['serverList'][self.ui.listWidget.currentIndex().row()] = self.shadowscoksServer
         self.guiConfig.write()
+        self.app.systemTrayIconContextMenu.reloadServer()
         print("save " + str(self.shadowscoksServer))
         self.shadowscoksServer = {}
         return True
@@ -604,6 +610,7 @@ class EditServersWindow(QMainWindow):
         else:
             self.guiConfig.guiConfig['serverList'][self.ui.listWidget.currentIndex().row()] = self.trojanServer
         self.guiConfig.write()
+        self.app.systemTrayIconContextMenu.reloadServer()
         print("save " + str(self.trojanServer))
         self.trojanServer = {}
         return True
@@ -652,6 +659,7 @@ class EditServersWindow(QMainWindow):
         else:
             self.guiConfig.guiConfig['serverList'][self.ui.listWidget.currentIndex().row()] = self.socksServer
         self.guiConfig.write()
+        self.app.systemTrayIconContextMenu.reloadServer()
         print("save " + str(self.socksServer))
         self.socksServer = {}
         return True
