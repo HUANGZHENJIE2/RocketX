@@ -1,19 +1,25 @@
 import os
 from PyQt5.QtGui import QIcon, QPixmap
-
+import sys
 
 class Resources:
     @staticmethod
     def getBaseResourcesPath():
-        return os.getcwd() + "\\res"
+        if sys.platform in 'win32':
+            return os.getcwd() + "\\res"
+        return os.getcwd() + "/res"
 
     @staticmethod
     def getLibPath():
-        return os.getcwd() + "\\lib"
+        if sys.platform in 'win32':
+            return os.getcwd() + "\\lib"
+        return os.getcwd() + "/lib"
 
     @staticmethod
     def getResourcesPath(path):
-        return Resources.getBaseResourcesPath() + "\\" + path
+        if sys.platform in 'win32':
+            return Resources.getBaseResourcesPath() + "\\" + path
+        return Resources.getBaseResourcesPath() + "/" + path
 
     @staticmethod
     def getIconByFilename(filename):
@@ -21,7 +27,9 @@ class Resources:
 
     @staticmethod
     def getBasePath(path):
-        return os.getcwd() + "\\" + path
+        if sys.platform in 'win32':
+            return os.getcwd() + "\\" + path
+        return os.getcwd() + "/" + path
 
     @staticmethod
     def getQPixmapByFilename(filename):
@@ -29,8 +37,12 @@ class Resources:
 
     @staticmethod
     def getConfigPath(path):
-        return os.getcwd() + "\\config\\" + path
+        if sys.platform in 'win32':
+            return os.getcwd() + "\\config\\" + path
+        return os.getcwd() + "/config/" + path
 
     @staticmethod
     def getValuesPath(path):
-        return os.getcwd() + "\\values\\" + path
+        if sys.platform in 'win32':
+            return os.getcwd() + "\\values\\" + path
+        return os.getcwd() + "/values/" + path

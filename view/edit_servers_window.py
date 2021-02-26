@@ -488,7 +488,7 @@ class EditServersWindow(QMainWindow):
             self.informationBox('Info', "Server level invalid.")
             return False
 
-        if self.vlessServer['  '].strip() == '':
+        if self.vlessServer['id'].strip() == '':
             print("Server id invalid")
             self.informationBox('Info', "Server id invalid")
             return False
