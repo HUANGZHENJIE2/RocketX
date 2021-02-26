@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TransportSettings</class>
+ <widget class="QDialog" name="TransportSettings">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>596</width>
+    <height>476</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QComboBox {
+	width: 100px;
+    cursor: pointer;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    height: 32px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    background: #FFFFFF;
+    border: 1px solid #B6B6B6;
+    color: #262626;
+    padding: 0 11px;
+    border-radius: 2px;
+}
+
+QLineEdit {
+	width: 100px;
+    cursor: pointer;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    height: 32px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    background:#FFFFFF;
+    border: 1px solid #B6B6B6;
+    color: #262626;
+    padding: 0 11px;
+    border-radius: 2px;
+}
+
+
+QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol- position :  top  right ;
+     width :  20px ;
+	 font-size: 16px;
+ 	 border:none;
+}
+ 
+QComboBox::down-arrow {
+    margin-right:10px;
+	image: url(:/newPrefix/keyboard_arrow_down_16dp.png);
+}
+
+QPushButton{
+	cursor: pointer;
+    display: inline-flex;
+    overflow: hidden;
+    max-width: 374px;
+    box-sizing: border-box;
+    transition: all 0.1s ease-in-out;
+    line-height: 1;
+    font-family: inherit;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 16px;
+    min-width: 32px;
+    padding: 0 8px;
+    height: 32px;
+    border: 1px solid #B6B6B6;
+    border-radius: 2px;
+    color: #262626;
+	background-color: rgb(229, 229, 229);
+}
+
+QPushButton:hover{
+	background-color: rgb(200, 200, 200);
+}
+ 
+QPushButton:pressed{
+	background-color: rgb(144, 144, 144);
+}
+QPushButton:!enabled{
+	background-color: rgb(100, 100, 100);
+	border-style: inset;
+}
+
+QGroupBox {
+   
+    border: 1px solid #B6B6B6;
+    border-radius: 5px;
+	margin-top: 6px;
+}
+
+/* 标题设置 */
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left:10px;
+    margin-left: 0px;
+    padding:0 1px;
+	
+}
+
+QListWidget{
+	border:none;
+	background-color: rgba(255, 255, 255, 0);
+    font: 14px &quot;Segoe UI&quot;;
+}
+
+QListWidget::item{
+	padding:8px 2px;
+	color:rgb(0, 0, 0);
+   	/*margin-left:40px;*/
+}
+QListWidget::item:hover{
+	background-color:rgb(208, 208, 208);
+	/*border-bottom:1px solid rgb(121,112,52);*/
+}
+QListWidget::item:selected
+{
+	
+	background-color: rgb(199, 199, 199);
+   /* border-bottom:1px solid rgb(121,112,52);
+    padding:0px;
+    margin:0px;
+    color:red;*/
+}
+QListWidget::item:selected:!active
+{
+    border-width:0px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="streamGroupBox">
+     <property name="title">
+      <string>Transport</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QFrame" name="frame_5">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="networkLabel">
+           <property name="text">
+            <string>Trpansport Protocol(Network)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QComboBox" name="networkComboBox">
+           <item>
+            <property name="text">
+             <string>tcp</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>kcp</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ws</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>http</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>domainsocket</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>quic</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_7">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="typeLabel">
+           <property name="text">
+            <string>Camouflage Type</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QComboBox" name="typeComboBox">
+           <item>
+            <property name="text">
+             <string>tcp</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>kcp</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ws</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>h2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>quic</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_6">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="hostLabel">
+           <property name="text">
+            <string>Camouflage domain(Host)</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="hostLineEdit">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_8">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="pathLabel">
+           <property name="text">
+            <string>Path</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="pathLineEdit">
+           <property name="maximumSize">
+            <size>
+             <width>200</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_10">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <widget class="QLabel" name="tlsLabel">
+           <property name="text">
+            <string>TLS</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QComboBox" name="tlsComboBox">
+           <item>
+            <property name="text">
+             <string>none</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>tls</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_12">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QLabel" name="allowLabel">
+           <property name="text">
+            <string>Allow Insecure</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_9">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QComboBox" name="allowComboBox">
+           <item>
+            <property name="text">
+             <string>true</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>false</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>TransportSettings</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>TransportSettings</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

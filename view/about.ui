@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutWindow</class>
+ <widget class="QMainWindow" name="AboutWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>687</width>
+    <height>227</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(247 247 247);
+font: 9pt &quot;Segoe UI&quot;;
+color: rgb(113, 113, 113);</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QFrame" name="frame">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="../res/res.qrc">:/img/J:/Users/huang/PycharmProjects/huangzhenjie/Rocket/res/app.ico</pixmap>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_2">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="appNameLabel">
+              <property name="styleSheet">
+               <string notr="true">color: #262626;
+font: 12pt &quot;Segoe UI&quot;;
+margin: 0px 0px</string>
+              </property>
+              <property name="text">
+               <string>Rocket X Beta</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="versionLabel">
+              <property name="styleSheet">
+               <string notr="true">margin-bottom:14px</string>
+              </property>
+              <property name="text">
+               <string>Version 1.1.1.210219_beta  (64-bit)</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="checkUpdatepushButton">
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	background-color: rgb(62, 62, 200);
+	color: rgb(255, 255, 255);
+	border-radius: 4px;
+	font: 10pt &quot;Segoe UI&quot;;
+	padding: 4px 8px
+}
+QPushButton:hover{
+	background-color: rgb(72, 72, 221);
+	
+}
+
+QPushButton:pressed {   
+	background-color: rgb(72, 72, 221);
+    border-style:solid;
+	border-width:2px 2px 2px 2px;
+	border-color:rgba(171,214,255);
+}  </string>
+           </property>
+           <property name="text">
+            <string>Check Update</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="descriptionLabel">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="text">
+         <string>This application is made possible by the &lt;a href=&quot;https://github.com/XTLS/Xray-core&quot;&gt;Xray&lt;/a&gt; open source project and other &lt;a href=&quot;http://www.cnblog.com/fron_csl&quot;&gt;open source software&lt;/a&gt;.</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="copyrightLabel">
+        <property name="text">
+         <string>Rocket X
+© 2021 HUANG ZHENJIE. All rights reserved.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../res/res.qrc"/>
+ </resources>
+ <connections/>
+</ui>

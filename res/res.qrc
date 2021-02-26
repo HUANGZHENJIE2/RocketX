@@ -1,0 +1,24 @@
+<RCC>
+  <qresource prefix="img">
+    <file>keyboard_arrow_down.png</file>
+    <file>baseline_keyboard_arrow_down_black_18dp.png</file>
+    <file>baseline_share_black_18dp.png</file>
+    <file>baseline_add_black_18dp.png</file>
+    <file>baseline_add_link_black_18dp.png</file>
+    <file>baseline_check_black_18dp.png</file>
+    <file>baseline_close_black_18dp.png</file>
+    <file>baseline_delete_black_18dp.png</file>
+    <file>my_wechat_qrcode.jpg</file>
+    <file>J:/Users/huang/PycharmProjects/huangzhenjie/Rocket/res/app.ico</file>
+    <file>J:/Users/huang/PycharmProjects/huangzhenjie/Rocket/res/baseline_close_black_18dp.png</file>
+  </qresource>
+  <qresource prefix="newPrefix">
+    <file>keyboard_arrow_down_16dp.png</file>
+  </qresource>
+  <qresource prefix="newPrefix">
+    <file>baseline_qr_code_2_black_18dp.png</file>
+  </qresource>
+  <qresource prefix="newPrefix">
+    <file>baseline_public_black_18dp.png</file>
+  </qresource>
+</RCC>

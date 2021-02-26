@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QListWidget" name="listWidget">
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QListWidget{
+	border:none;
+	background-color: rgba(255, 255, 255, 0);
+    font: 14px &quot;Segoe UI&quot;;
+}
+
+QListWidget::item{
+	padding:8px 2px;
+	color:rgb(0, 0, 0);
+   	/*margin-left:40px;*/
+}
+QListWidget::item:hover{
+	background-color:rgb(208, 208, 208);
+	/*border-bottom:1px solid rgb(121,112,52);*/
+}
+QListWidget::item:selected
+{
+	
+	background-color: rgb(255, 255, 255);
+   /* border-bottom:1px solid rgb(121,112,52);
+    padding:0px;
+    margin:0px;
+    color:red;*/
+}
+QListWidget::item:selected:!active
+{
+    border-width:0px;
+}</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>System Proxy</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Servers</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>PAC</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Forward</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Start Boot</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QTabWidget" name="tabWidget">
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>Tab 1</string>
+          </attribute>
+         </widget>
+         <widget class="QWidget" name="tab_2">
+          <attribute name="title">
+           <string>Tab 2</string>
+          </attribute>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

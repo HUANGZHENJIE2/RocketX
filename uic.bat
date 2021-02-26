@@ -1,0 +1,1 @@
+pyuic5 view/transport_settings.ui -o view/transport_settings.py
