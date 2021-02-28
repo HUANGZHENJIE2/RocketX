@@ -5,7 +5,7 @@ from menu.servers_menu import ServersMenu
 from menu.system_proxy_menu import SystemProxyMenu
 from resources import Resources
 import server
-
+import sys
 
 class SystemTrayIconContextMenu(QMenu):
     def __init__(self, app):
@@ -26,6 +26,7 @@ class SystemTrayIconContextMenu(QMenu):
         self.addSeparator()
         self.helpMenu = HelpMenu(self.app)
         self.helpAction = self.addAction("Help")
+        self.exitAction = self.addAction("Exit")
         self.isConnected = False
 
         self.init()
@@ -72,7 +73,8 @@ class SystemTrayIconContextMenu(QMenu):
             self.app.guiConfig.writeNewJsonFile('forwardServer', 'config.json')
             self.connectServer()
 
-        server.start_pac_server(self.app.guiConfig.guiConfig['pac']['host'], self.app.guiConfig.guiConfig['pac']['port'])
+        server.start_pac_server(self.app.guiConfig.guiConfig['pac']['host'],
+                                self.app.guiConfig.guiConfig['pac']['port'])
 
         # 根据属性文件初始化菜单
         self.helpAction.setText(pros['help'])
@@ -82,6 +84,7 @@ class SystemTrayIconContextMenu(QMenu):
         self.pacAction.setText(pros['PAC'])
         self.serversAction.setText(pros['servers'])
         self.systemProxyAction.setText(pros['systemProxy'])
+        self.exitAction.setText(pros['exit'])
 
         # 绑定菜单
         self.helpAction.setMenu(self.helpMenu)
@@ -92,7 +95,7 @@ class SystemTrayIconContextMenu(QMenu):
         self.startBootAction.triggered.connect(self.startBootActionTriggered)
         self.allowOtherDevicesToConnectAction.triggered.connect(self.allowOtherDevicesToConnectActionTriggered)
         self.connectAndDisconnectAction.triggered.connect(self.connectAndDisconnectActionTriggered)
-        pass
+        self.exitAction.triggered.connect(self.exit)
 
     def reloadServer(self):
         self.serversMenu = ServersMenu(self.app)
@@ -122,7 +125,14 @@ class SystemTrayIconContextMenu(QMenu):
         self.isConnected = True
         self.connectAndDisconnectAction.setText(pros['disconnect'])
         self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_black_18dp.png'))
-        self.app.systemTrayIcon.setToolTip(pros['connected'].replace('{0}', "").replace('{1}', pros['appName']))
+        self.app.systemTrayIcon.setToolTip(pros['connected'].replace(
+            '{0}',
+            self.guiConfig.guiConfig["serverList"][self.guiConfig.guiConfig['settings']['selectedServerIndex']][
+                'remarks']
+        ).replace(
+            '{1}', pros['appName']).replace(
+            '{2}', pros[self.guiConfig.guiConfig['systemProxy']['proxyMode']]))
+        self.systemProxyMenu.setEnabledProxy()
 
     def disconnectServer(self):
         pros = self.app.strings.properties
@@ -131,6 +141,7 @@ class SystemTrayIconContextMenu(QMenu):
         self.connectAndDisconnectAction.setText(pros['disconnect'])
         self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_off_black_18dp.png'))
         self.app.systemTrayIcon.setToolTip(pros['notConnected'].replace('{0}', pros['appName']))
+        self.systemProxyMenu.setDisabledProxy()
 
     def setStartBoot(self):
         startBoot = self.guiConfig.guiConfig['settings']['startBoot']
@@ -160,3 +171,7 @@ class SystemTrayIconContextMenu(QMenu):
         else:
             self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_off_black_18dp.png'))
             self.app.systemTrayIcon.setToolTip("Not connect -Rocket X")
+
+    def exit(self):
+        self.disconnectServer()
+        sys.exit()

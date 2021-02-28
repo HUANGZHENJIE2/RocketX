@@ -1,1 +1,1 @@
-pyuic5 view/transport_settings.ui -o view/transport_settings.py
+pyuic5 view/qrcode.ui -o view/ui_qrcode.py

@@ -1,5 +1,6 @@
 from functools import partial
 
+import pyperclip as pyperclip
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMenu
 
@@ -23,7 +24,7 @@ class ServersMenu(QMenu):
         self.importServerFromUrlAction = self.addAction("Import server from url")
         self.addSeparator()
         self.copySelectedServerUrlAction = self.addAction("Copy selected server url")
-        self.showServerQRCode = self.addAction("Show selected server QR code")
+        self.showServerQRCodeAction = self.addAction("Show selected server QR code")
 
         self.init()
 
@@ -63,12 +64,14 @@ class ServersMenu(QMenu):
         self.editServersAction.setText(pros["editServers"])
         self.importServerFromUrlAction.setText(pros["importServerFromUrl"])
         self.copySelectedServerUrlAction.setText(pros["copySelectedServerUrlAction"])
-        self.showServerQRCode.setText(pros["showServerQRCode"])
+        self.showServerQRCodeAction.setText(pros["showServerQRCode"])
 
         self.serverActions[self.app.guiConfig.guiConfig['settings']['selectedServerIndex']] \
             .setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
+        self.showServerQRCodeAction.triggered.connect(self.showServerQRCode)
         self.editServersAction.triggered.connect(self.editServers)
-
+        self.importServerFromUrlAction.triggered.connect(self.importServerFromUrl)
+        self.copySelectedServerUrlAction.triggered.connect(self.copySelectedServerUrl)
 
     def setServer(self, index):
         self.serverActions[self.app.guiConfig.guiConfig['settings']['selectedServerIndex']] \
@@ -131,6 +134,20 @@ class ServersMenu(QMenu):
             outbound['settings']['vnext'][0]['users'][0]['level'] = server['level']
             return outbound
         return outbound
+    
+    def importServerFromUrl(self):
+        self.app.editServersWindow.show()
+        self.app.editServersWindow.addFromLink()
+
+    def copySelectedServerUrl(self):
+        pros = self.app.strings.properties
+        url = self.app.qrcodeMainWindow.serverToUrl(self.app.guiConfig.guiConfig['settings']['selectedServerIndex'])
+        pyperclip.copy(url)
+        print(f"copy url {url}")
+        self.app.systemTrayIcon.showMessage(pros['appName'], pros['copyUrl'].replace("{0}", ""), Resources.getIconByFilename('app.ico'))
+
+    def showServerQRCode(self):
+        self.app.qrcodeMainWindow.show()
 
     def editServers(self):
         print('edit server')

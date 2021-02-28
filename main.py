@@ -1,6 +1,15 @@
+from PyQt5.QtWidgets import QMessageBox
+
 from application import Application
-from gui_config import GuiConfig
+
 
 if __name__ == '__main__':
-    app = Application()
-    app.run()
+    try:
+        app = Application()
+        app.run()
+    except BaseException as be:
+        errorMessageBox = QMessageBox()
+        errorMessageBox.setWindowTitle('Error')
+        errorMessageBox.setIcon(QMessageBox.Critical)
+        errorMessageBox.setText(str(be))
+        errorMessageBox.exec()

@@ -9,6 +9,7 @@ from resources import Resources
 from view.AboutWindow import AboutWindow
 from view.edit_servers_window import EditServersWindow
 from view.feedback_window import FeedbackWindow
+from view.qrcode_main_window import QRCodeMainWindow
 
 
 class Application:
@@ -19,6 +20,7 @@ class Application:
         self.strings = Properties()
         self.aboutWindow = AboutWindow(self)
         self.feedbackWindow = FeedbackWindow(self)
+        self.qrcodeMainWindow = QRCodeMainWindow(self)
         self.editServersWindow = EditServersWindow(self)
         self.systemTrayIcon = QSystemTrayIcon(None)
         self.systemTrayIconContextMenu = SystemTrayIconContextMenu(self)

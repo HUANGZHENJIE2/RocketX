@@ -1,7 +1,9 @@
+import pyperclip
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QMessageBox
 
 from resources import Resources
+from view.import_server_from_url_dialog import ImportServerFromURLDialog
 from view.transport_settings_dialog import TransportSettingsDialog
 from view.ui_edit_server import Ui_EditServerWindow
 
@@ -21,6 +23,7 @@ class EditServersWindow(QMainWindow):
         self.setWindowIcon(Resources.getIconByFilename('app.ico'))
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.WindowCloseButtonHint)
+        self.url = ""
         self.init()
 
     '''
@@ -62,7 +65,8 @@ class EditServersWindow(QMainWindow):
         self.ui.savePushButton.clicked.connect(self.save)
         self.ui.cancelPushButton.clicked.connect(self.close)
         self.ui.resetPushButton.clicked.connect(self.reset)
-        pass
+        self.url = self.app.qrcodeMainWindow.serverToUrl(
+            self.app.guiConfig.guiConfig['settings']['selectedServerIndex'])
 
     def add(self):
         if self.ui.listWidget.count() > 0:
@@ -77,10 +81,11 @@ class EditServersWindow(QMainWindow):
         self.ui.listWidget.addItem(item)
         self.ui.listWidget.setCurrentRow(len(self.guiConfig.guiConfig['serverList']))
 
-
-
     def addFromLink(self):
-        print("add from link ......")
+        importServerFromURLDialog = ImportServerFromURLDialog(self.app)
+        importServerFromURLDialog.exec_()
+
+
 
     def delete(self):
         if len(self.app.guiConfig.guiConfig['serverList']) == 0:
@@ -107,7 +112,6 @@ class EditServersWindow(QMainWindow):
                 return
             self.setServer(None)
 
-
     # 做一个输入监听否则一刷新就没了
     def listWidgetItemClicked(self):
         selectedServer = None
@@ -116,13 +120,18 @@ class EditServersWindow(QMainWindow):
         else:
             selectedServer = self.guiConfig.guiConfig['serverList'][self.ui.listWidget.currentIndex().row()]
         self.setServer(selectedServer)
+        self.app.qrcodeMainWindow.init(self.ui.listWidget.currentIndex().row())
+        self.url = self.app.qrcodeMainWindow.serverToUrl(self.ui.listWidget.currentIndex().row())
         print(f"selected {selectedServer}")
 
     def showQRCode(self):
-        print("show QR code")
+        self.app.qrcodeMainWindow.show_(self.ui.listWidget.currentIndex().row())
 
     def share(self):
-        print("share")
+        pros = self.app.strings.properties
+        pyperclip.copy(self.url)
+        print(f"copy url {self.url}")
+        self.app.systemTrayIcon.showMessage(pros['appName'], pros['copyUrl'].replace("{0}", ""), Resources.getIconByFilename('app.ico'))
 
     def save(self):
         protocol = self.ui.protocolComboBox.currentText()
@@ -309,6 +318,7 @@ class EditServersWindow(QMainWindow):
         self.ui.transportSettingsPushButton.setVisible(True)
 
     def setVlessServer(self):
+        pros = self.app.strings.properties
         self.ui.frame_17.setVisible(True)
         self.ui.frame_18.setVisible(True)
         self.ui.frame_19.setVisible(False)
@@ -320,44 +330,47 @@ class EditServersWindow(QMainWindow):
         self.ui.frame_3.setVisible(False)
         self.ui.frame_4.setVisible(False)
         self.ui.portLineEdit.setText("443")
-        self.ui.securityLabel_2.setText("Encryption")
+        self.ui.securityLabel_2.setText(pros['security'])
         self.ui.transportSettingsPushButton.setVisible(True)
 
     def setShadowscoksServer(self):
+        pros = self.app.strings.properties
         self.ui.frame_17.setVisible(False)
         self.ui.frame_18.setVisible(False)
         self.ui.frame_19.setVisible(False)
         self.ui.frame_16.setVisible(False)
         self.ui.frame_3.setVisible(True)
         self.ui.frame_4.setVisible(True)
-        self.ui.passwordLabel.setText("Password")
+        self.ui.passwordLabel.setText(pros["password"])
         self.ui.portLineEdit.setText("8388")
-        self.ui.methodLabel.setText("Encryption Method")
+        self.ui.methodLabel.setText(pros["method"])
         self.ui.otaLabel.setVisible(False)
         self.ui.otaComboBox.setVisible(False)
         self.ui.methodComboBox.setCurrentIndex(6)
         self.ui.transportSettingsPushButton.setVisible(False)
 
     def setTrojanServer(self):
+        pros = self.app.strings.properties
         self.ui.frame_17.setVisible(False)
         self.ui.frame_18.setVisible(False)
         self.ui.frame_19.setVisible(True)
         self.ui.frame_16.setVisible(False)
         self.ui.frame_3.setVisible(True)
         self.ui.frame_4.setVisible(False)
-        self.ui.passwordLabel.setText("Password")
+        self.ui.passwordLabel.setText(pros["password"])
         self.ui.portLineEdit.setText("443")
         self.ui.transportSettingsPushButton.setVisible(False)
 
     def setSocksServer(self):
+        pros = self.app.strings.properties
         self.ui.frame_17.setVisible(False)
         self.ui.frame_18.setVisible(False)
         self.ui.frame_19.setVisible(False)
         self.ui.frame_16.setVisible(True)
         self.ui.frame_3.setVisible(True)
         self.ui.frame_4.setVisible(False)
-        self.ui.userLabel.setText("Username (Optional)")
-        self.ui.passwordLabel.setText("Password (Optional)")
+        self.ui.userLabel.setText(pros['usernameOptional'])
+        self.ui.passwordLabel.setText(pros['passwordOptional'])
         self.ui.portLineEdit.setText("1080")
         self.ui.transportSettingsPushButton.setVisible(False)
 
@@ -479,7 +492,6 @@ class EditServersWindow(QMainWindow):
             self.informationBox('Info', "Server id invalid")
             return False
 
-
         if self.vlessServer['level'].strip() == '':
             print("Server level invalid")
             self.informationBox('Info', "Server level invalid.")
@@ -512,7 +524,6 @@ class EditServersWindow(QMainWindow):
         self.vlessServer = {}
         return True
 
-
     def saveShadowscoksServer(self):
 
         self.shadowscoksServer = {
@@ -523,7 +534,6 @@ class EditServersWindow(QMainWindow):
             "password": self.ui.passwordLineEdit.text(),
             "method": self.ui.methodComboBox.currentText(),
         }
-
 
         print(f"debug {self.ui.methodComboBox.currentText()}")
         if self.shadowscoksServer['address'].strip() == '':

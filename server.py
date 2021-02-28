@@ -1,12 +1,15 @@
 import os
 import _thread
+
+import sysproxy
 from resources import Resources
 import time
 import pac_server
+import subprocess
 
 
 def _start_server_thread(cmd, status):
-    os.system(cmd)
+    sysproxy.call(cmd)
     return status
 
 
@@ -23,6 +26,8 @@ def start_pac_server(host, port):
         (host, port)
     )
 
+
 def kill_forward_server():
-    os.system('%s%s' % ("taskkill /F /IM ", "xray.exe"))
+    cmd = "taskkill /F /IM xray.exe"
+    sysproxy.call(cmd)
 

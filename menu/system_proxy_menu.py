@@ -2,6 +2,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMenu
 
 from resources import Resources
+import sysproxy
 
 
 class SystemProxyMenu(QMenu):
@@ -82,11 +83,26 @@ class SystemProxyMenu(QMenu):
             self.disableAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
             self.PACAction.setIcon(Resources.getIconByFilename('hzj'))
             self.globalAction.setIcon(Resources.getIconByFilename('hzj'))
+            sysproxy.off()
         elif self.guiConfig.guiConfig['systemProxy']['proxyMode'] in "PAC":
             self.PACAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
             self.globalAction.setIcon(Resources.getIconByFilename('hzj'))
             self.disableAction.setIcon(Resources.getIconByFilename('hzj'))
+            sysproxy.setAutoProxyUrl(self.guiConfig.guiConfig['systemProxy']['scriptAddress'])
         elif self.guiConfig.guiConfig['systemProxy']['proxyMode'] in "Global":
             self.globalAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
             self.PACAction.setIcon(Resources.getIconByFilename('hzj'))
             self.disableAction.setIcon(Resources.getIconByFilename('hzj'))
+            sysproxy.setWebProxy(f"{self.guiConfig.guiConfig['systemProxy']['proxyAddress']}:"
+                                 f"{self.guiConfig.guiConfig['systemProxy']['proxyPort']}",
+                                 self.guiConfig.guiConfig['systemProxy']['proxyOverride'])
+
+    def setDisabledProxy(self):
+        if self.guiConfig.guiConfig['systemProxy']['proxyMode'] not in "Disable":
+            self.disableAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
+            self.PACAction.setIcon(Resources.getIconByFilename('hzj'))
+            self.globalAction.setIcon(Resources.getIconByFilename('hzj'))
+            sysproxy.off()
+
+    def setEnabledProxy(self):
+        self.setSystemProxyModelIcon()
