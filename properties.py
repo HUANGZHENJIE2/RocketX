@@ -3,7 +3,7 @@ from resources import Resources
 
 class Properties:
 
-    def __init__(self, propertiesPath: str = Resources.getValuesPath('strings.properties')):
+    def __init__(self, propertiesPath: str = Resources.getValuesPath('strings')):
         self.properties: dict = None
         self.propertiesPath = propertiesPath
         self.load()

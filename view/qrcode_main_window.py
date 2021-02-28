@@ -25,6 +25,11 @@ class QRCodeMainWindow(QMainWindow):
         if index is None:
             index = self.app.guiConfig.guiConfig['settings']['selectedServerIndex']
 
+        len_ = len(self.app.guiConfig.guiConfig['serverList'])
+        print(f"debug 29 {len_ == 0}-{(len_ - 1) < index}")
+        if len_ == 0 or (len_ - 1) < index:
+            return ""
+
         url = self.serverToUrl(index)
         qrCodeImage: image = qrcode.make(url)
         qrCodeImage.save('hzj.qr')
@@ -38,8 +43,12 @@ class QRCodeMainWindow(QMainWindow):
             index]['remarks'])
 
     def serverToUrl(self, index):
+        len_ = len(self.app.guiConfig.guiConfig['serverList'])
+        print(f"debug 47 {len_ == 0}-{(len_-1) < index}")
+        if len_ == 0 or (len_-1) < index:
+            return ""
         server = self.app.guiConfig.guiConfig['serverList'][
-            index]
+                index]
 
         protocol = server['protocol']
         if protocol in 'Vmess':

@@ -32,5 +32,7 @@ def off():
 
 def call(cmd):
     print(cmd)
-    os.system(cmd)
+    # os.system(cmd)
+    subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL, shell=False, creationflags=subprocess.CREATE_NO_WINDOW)
+
 

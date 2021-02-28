@@ -1,1 +1,1 @@
-pyinstaller -F -w -i res/app.ico main.py
+pyinstaller -F -w -i resources/app.ico main.py

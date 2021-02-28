@@ -1,0 +1,134 @@
+QComboBox {
+	width: 100px;
+    cursor: pointer;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    height: 32px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    background: #FFFFFF;
+    border: 1px solid #B6B6B6;
+    color: #262626;
+    padding: 0 11px;
+    border-radius: 2px;
+}
+
+QLineEdit {
+	width: 100px;
+    cursor: pointer;
+    margin: 0;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    height: 32px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    background:#FFFFFF;
+    border: 1px solid #B6B6B6;
+    color: #262626;
+    padding: 0 11px;
+    border-radius: 2px;
+}
+
+
+QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol- position :  top  right ;
+     width :  20px ;
+	 font-size: 16px;
+ 	 border:none;
+}
+
+QComboBox::down-arrow {
+    margin-right:10px;
+	image: url(resources/keyboard_arrow_down_16dp.png);
+}
+
+QPushButton{
+	cursor: pointer;
+    display: inline-flex;
+    overflow: hidden;
+    max-width: 374px;
+    box-sizing: border-box;
+    transition: all 0.1s ease-in-out;
+    line-height: 1;
+    font-family: inherit;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 16px;
+    min-width: 32px;
+    padding: 0 8px;
+    height: 32px;
+    border: 1px solid #B6B6B6;
+    border-radius: 2px;
+    color: #262626;
+	background-color: rgb(229, 229, 229);
+}
+
+QPushButton:hover{
+	background-color: rgb(200, 200, 200);
+}
+
+QPushButton:pressed{
+	background-color: rgb(144, 144, 144);
+}
+QPushButton:!enabled{
+	background-color: rgb(100, 100, 100);
+	border-style: inset;
+}
+
+QGroupBox {
+
+    border: 1px solid #B6B6B6;
+    border-radius: 5px;
+	margin-top: 6px;
+}
+
+/* 标题设置 */
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left:10px;
+    margin-left: 0px;
+    padding:0 1px;
+
+}
+
+QListWidget{
+	border:none;
+	background-color: rgba(255, 255, 255, 0);
+    font: 14px "Segoe UI";
+}
+
+QListWidget::item{
+	padding:8px 2px;
+	color:rgb(0, 0, 0);
+   	/*margin-left:40px;*/
+}
+QListWidget::item:hover{
+	background-color:rgb(208, 208, 208);
+	/*border-bottom:1px solid rgb(121,112,52);*/
+}
+QListWidget::item:selected
+{
+
+	background-color: rgb(199, 199, 199);
+   /* border-bottom:1px solid rgb(121,112,52);
+    padding:0px;
+    margin:0px;
+    color:red;*/
+}
+QListWidget::item:selected:!active
+{
+    border-width:0px;
+}
+
+QListWidget{
+	 border: 1px solid #B6B6B6;
+}

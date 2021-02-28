@@ -1,11 +1,13 @@
-from PyQt5.QtWidgets import QMenu
+from PyQt5.QtWidgets import QMenu, QMessageBox
 
+import utils
 from menu.help_menu import HelpMenu
 from menu.servers_menu import ServersMenu
 from menu.system_proxy_menu import SystemProxyMenu
 from resources import Resources
 import server
 import sys
+
 
 class SystemTrayIconContextMenu(QMenu):
     def __init__(self, app):
@@ -33,35 +35,7 @@ class SystemTrayIconContextMenu(QMenu):
 
     def init(self):
         self.setStyleSheet(
-            '''
-                 QMenu {
-                    background-color: rgb(236,236,237);
-                    border-width: 1px 1px 1px 1px;
-                    border-style: solid;
-                    border-color: #c6c6c6;
-                    font: 9pt "Arial";
-                    padding: 3px 0px
-                }
-                
-                QMenu::item {
-                    font-size:9pt "Arial";
-                    color: rgb(0,0,0);
-                    background-color: rgb(236,236,237);
-                    padding: 8px 40px 8px 15px;
-                }
-                QMenu::icon{
-                    position: absolute;
-                    top: 1px;
-                    right: 1px;
-                    bottom: 1px;
-                    left: 10px;
-                }
-                
-                QMenu::item:selected {
-                    background-color : rgb(255, 255, 255);
-                }
-
-            '''
+            utils.read_text_file(Resources.getResourcesPackagesPath('menu'))
         )
 
         pros = self.app.strings.properties
@@ -121,6 +95,10 @@ class SystemTrayIconContextMenu(QMenu):
 
     def connectServer(self):
         pros = self.app.strings.properties
+        if len(self.app.guiConfig.guiConfig['serverList']) == 0:
+            self.informationBox(pros['connect'], pros['connectFailed'])
+            return
+
         server.start_forward_server()
         self.isConnected = True
         self.connectAndDisconnectAction.setText(pros['disconnect'])
@@ -175,3 +153,12 @@ class SystemTrayIconContextMenu(QMenu):
     def exit(self):
         self.disconnectServer()
         sys.exit()
+
+    def informationBox(self, title, text):
+        informationMessageBox = QMessageBox(self)
+        informationMessageBox.setWindowIcon(Resources.getIconByFilename('app.ico'))
+        informationMessageBox.setWindowTitle(title)
+        informationMessageBox.setIcon(QMessageBox.Information)
+        informationMessageBox.setText(text)
+        informationMessageBox.exec()
+        return

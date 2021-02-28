@@ -6,8 +6,8 @@ class Resources:
     @staticmethod
     def getBaseResourcesPath():
         if sys.platform in 'win32':
-            return os.getcwd() + "\\res"
-        return os.getcwd() + "/res"
+            return os.getcwd() + "\\resources"
+        return os.getcwd() + "/resources"
 
     @staticmethod
     def getLibPath(path):
@@ -20,6 +20,12 @@ class Resources:
         if sys.platform in 'win32':
             return Resources.getBaseResourcesPath() + "\\" + path
         return Resources.getBaseResourcesPath() + "/" + path
+
+    @staticmethod
+    def getResourcesPackagesPath(path):
+        if sys.platform in 'win32':
+            return os.getcwd() + "\\.packages\\" + path
+        return os.getcwd() + "/.packages/" + path
 
     @staticmethod
     def getIconByFilename(filename):
@@ -44,5 +50,5 @@ class Resources:
     @staticmethod
     def getValuesPath(path):
         if sys.platform in 'win32':
-            return os.getcwd() + "\\values\\" + path
-        return os.getcwd() + "/values/" + path
+            return os.getcwd() + "\\.values\\" + path
+        return os.getcwd() + "/.values/" + path

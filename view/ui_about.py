@@ -18,9 +18,7 @@ class Ui_AboutWindow(object):
         AboutWindow.setObjectName("AboutWindow")
         AboutWindow.resize(687, 227)
         self.centralwidget = QtWidgets.QWidget(AboutWindow)
-        self.centralwidget.setStyleSheet("background-color: rgb(247 247 247);\n"
-"font: 9pt \"Segoe UI\";\n"
-"color: rgb(113, 113, 113);")
+
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -45,9 +43,7 @@ class Ui_AboutWindow(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.appNameLabel = QtWidgets.QLabel(self.frame_2)
-        self.appNameLabel.setStyleSheet("color: #262626;\n"
-"font: 12pt \"Segoe UI\";\n"
-"margin: 0px 0px")
+
         self.appNameLabel.setObjectName("appNameLabel")
         self.verticalLayout.addWidget(self.appNameLabel)
         self.versionLabel = QtWidgets.QLabel(self.frame_2)
@@ -58,24 +54,7 @@ class Ui_AboutWindow(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
         self.checkUpdatepushButton = QtWidgets.QPushButton(self.frame)
-        self.checkUpdatepushButton.setStyleSheet("QPushButton{\n"
-"    background-color: rgb(62, 62, 200);\n"
-"    color: rgb(255, 255, 255);\n"
-"    border-radius: 4px;\n"
-"    font: 10pt \"Segoe UI\";\n"
-"    padding: 4px 8px\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(72, 72, 221);\n"
-"    \n"
-"}\n"
-"\n"
-"QPushButton:pressed {   \n"
-"    background-color: rgb(72, 72, 221);\n"
-"    border-style:solid;\n"
-"    border-width:2px 2px 2px 2px;\n"
-"    border-color:rgba(171,214,255);\n"
-"}  ")
+
         self.checkUpdatepushButton.setObjectName("checkUpdatepushButton")
         self.horizontalLayout_3.addWidget(self.checkUpdatepushButton)
         self.verticalLayout_2.addWidget(self.frame)

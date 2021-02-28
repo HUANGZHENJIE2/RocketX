@@ -1,6 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QDialog
 
+import utils
 from resources import Resources
 from .ui_transport_settings import Ui_TransportSettings
 
@@ -14,6 +15,12 @@ class TransportSettingsDialog(QDialog):
         self.setWindowTitle("About")
         self.setWindowIcon(Resources.getIconByFilename('app.ico'))
         self.ui.setupUi(self)
+        self.init()
+
+    def init(self):
+        self.setStyleSheet(
+            utils.read_text_file(Resources.getResourcesPackagesPath('window'))
+        )
 
     def closeEvent(self, event):
         self.hide()

@@ -2,6 +2,7 @@ import pyperclip
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QListWidgetItem, QMessageBox
 
+import utils
 from resources import Resources
 from view.import_server_from_url_dialog import ImportServerFromURLDialog
 from view.transport_settings_dialog import TransportSettingsDialog
@@ -26,15 +27,11 @@ class EditServersWindow(QMainWindow):
         self.url = ""
         self.init()
 
-    '''
-        self.ui.addPushButton.
-        self.ui.addFromLinkPushButton.
-        self.ui.deletePushButton.
-        self.ui.showQRCodePushButton.
-        self.ui.sharPushButton.
-    '''
-
     def init(self):
+
+        self.setStyleSheet(
+            utils.read_text_file(Resources.getResourcesPackagesPath('window'))
+        )
         # 根据配置文件初始化
 
         if len(self.guiConfig.guiConfig['serverList']) == 0:
@@ -48,7 +45,7 @@ class EditServersWindow(QMainWindow):
                 self.ui.listWidget.addItem(item)
 
             self.ui.listWidget.setCurrentRow(self.selectedServerIndex)
-            self.setServer(self.guiConfig.guiConfig['serverList'][self.selectedServerIndex])
+            self.setServer(self.guiConfig.guiConfig['serverList'][0])
 
         # 绑定信槽
         self.ui.addPushButton.clicked.connect(self.add)
@@ -72,6 +69,7 @@ class EditServersWindow(QMainWindow):
         if self.ui.listWidget.count() > 0:
             if not self.save():
                 return
+        self.clearServer()
         remarks = "New Server"
         item = QListWidgetItem()
         item.setText(remarks)
@@ -85,17 +83,17 @@ class EditServersWindow(QMainWindow):
         importServerFromURLDialog = ImportServerFromURLDialog(self.app)
         importServerFromURLDialog.exec_()
 
-
-
     def delete(self):
+        pros = self.app.strings.properties
         if len(self.app.guiConfig.guiConfig['serverList']) == 0:
-            self.informationBox("Delete", "Can't delete it.")
+            self.informationBox(pros['delete'], pros['deleteFailed'])
             return
         print(self.ui.listWidget.currentIndex().row())
         selectedIndex = self.ui.listWidget.currentIndex().row()
         item = self.ui.listWidget.item(selectedIndex)
+
         result = QMessageBox.information(
-            self, "Delete", f"Are you sure delete {item.text()}.",
+            self, pros['delete'], pros['deleteConfirmation'].replace('{server.remarks}', item.text(), 1100),
             QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
 
         if result == QMessageBox.Yes:
@@ -131,7 +129,8 @@ class EditServersWindow(QMainWindow):
         pros = self.app.strings.properties
         pyperclip.copy(self.url)
         print(f"copy url {self.url}")
-        self.app.systemTrayIcon.showMessage(pros['appName'], pros['copyUrl'].replace("{0}", ""), Resources.getIconByFilename('app.ico'))
+        self.app.systemTrayIcon.showMessage(pros['appName'], pros['copyUrl'].replace("{0}", ""),
+                                            Resources.getIconByFilename('app.ico'))
 
     def save(self):
         protocol = self.ui.protocolComboBox.currentText()
@@ -686,3 +685,13 @@ class EditServersWindow(QMainWindow):
     def closeEvent(self, event):
         self.hide()
         event.ignore()
+
+    def clearServer(self):
+        self.ui.addressLineEdit.setText("")
+        self.ui.portLineEdit.setText("37192")
+        self.ui.UUIDLineEdit.setText("")
+        self.ui.alterIdLineEdit.setText("")
+        self.ui.userLineEdit.setText("")
+        self.ui.hostLineEdit.setText("")
+        self.ui.passwordLineEdit.setText("")
+        self.ui.addressLineEdit.setText("")

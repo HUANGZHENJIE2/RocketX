@@ -1,6 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMenu
 
+import utils
 from resources import Resources
 import sysproxy
 
@@ -19,38 +20,11 @@ class SystemProxyMenu(QMenu):
 
     def init(self):
         self.setStyleSheet(
-            '''
-                QMenu {
-                    background-color: rgb(236,236,237);
-                    border-width: 1px 1px 1px 1px;
-                    border-style: solid;
-                    border-color: #c6c6c6;
-                    font: 9pt "Arial";
-                    padding: 3px 0px
-                }
-                
-                QMenu::item {
-                    font-size:9pt "Arial";
-                    color: rgb(0,0,0);
-                    background-color: rgb(236,236,237);
-                    padding: 8px 40px 8px 15px;
-                }
-                QMenu::icon{
-                    position: absolute;
-                    top: 1px;
-                    right: 1px;
-                    bottom: 1px;
-                    left: 10px;
-                }
-                
-                QMenu::item:selected {
-                    background-color : rgb(255, 255, 255);
-                }
-            '''
+            utils.read_text_file(Resources.getResourcesPackagesPath('menu'))
         )
 
         # 根据配置初始化菜单
-        self.setSystemProxyModelIcon()
+        self.disableAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
 
         # 根据属性文件初始化菜单
         pros = self.app.strings.properties

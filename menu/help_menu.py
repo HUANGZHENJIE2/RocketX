@@ -1,6 +1,9 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMenu
 
+import utils
+from resources import Resources
+
 
 class HelpMenu(QMenu):
     def __init__(self, app):
@@ -15,31 +18,14 @@ class HelpMenu(QMenu):
     def init(self):
 
         self.setStyleSheet(
-            '''
-                QMenu {
-                    background-color: rgb(236,236,237);
-                    border-width: 1px 1px 1px 1px;
-                    border-style: solid;
-                    border-color: #c6c6c6;
-                    font: 9pt "Arial";
-                    padding: 3px 0px
-                }
-                
-                QMenu::item {
-                    font-size:9pt "Arial";
-                    color: rgb(0,0,0);
-                    background-color: rgb(236,236,237);
-                    padding: 8px 40px 8px 40px;
-                }
-                
-                QMenu::item:selected {
-                    background-color : rgb(255, 255, 255);
-                }
-            '''
+            utils.read_text_file(Resources.getResourcesPackagesPath('menu'))
         )
         pros = self.app.strings.properties
         self.feedbackAction.setText(pros["feedback"])
         self.aboutAction.setText(pros["about"])
+
+        self.feedbackAction.setIcon(Resources.getIconByFilename('none_black_18dp.png'))
+
         self.aboutAction.triggered.connect(self.aboutActionTriggered)
         self.feedbackAction.triggered.connect(self.feedbackActionTriggered)
 

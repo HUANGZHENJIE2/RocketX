@@ -6,7 +6,7 @@ from gui_config import GuiConfig
 from menu.system_tray_icon_context_menu import SystemTrayIconContextMenu
 from properties import Properties
 from resources import Resources
-from view.AboutWindow import AboutWindow
+from view.about_window import AboutWindow
 from view.edit_servers_window import EditServersWindow
 from view.feedback_window import FeedbackWindow
 from view.qrcode_main_window import QRCodeMainWindow
@@ -32,6 +32,8 @@ class Application:
         pass
 
     def init(self):
+        if len(self.guiConfig.guiConfig['serverList']) == 0:
+            self.editServersWindow.show()
         self.systemTrayIcon.setContextMenu(self.systemTrayIconContextMenu)
         self.systemTrayIcon.setIcon(Resources.getIconByFilename('app.ico'))
 

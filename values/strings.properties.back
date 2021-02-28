@@ -1,9 +1,0 @@
- appName=Rocket X
-
-
-about.windowsTitle=About
-about.appName=Rocket X
-about.version=Version 1.1.1.210219_beta  (64-bit)
-about.description=This application is made possible by the <a href="https://github.com/XTLS/Xray-core">Xray</a> open source project and other <a href="http://www.cnblog.com/fron_csl">open source software</a>.
-about.copyright=Rocket X\n? 2021 HUANG ZHENJIE. All rights reserved.
-about.checkUpdate=Check Update
