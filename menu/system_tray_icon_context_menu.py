@@ -116,7 +116,7 @@ class SystemTrayIconContextMenu(QMenu):
         pros = self.app.strings.properties
         server.kill_forward_server()
         self.isConnected = False
-        self.connectAndDisconnectAction.setText(pros['disconnect'])
+        self.connectAndDisconnectAction.setText(pros['connect'])
         self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_off_black_18dp.png'))
         self.app.systemTrayIcon.setToolTip(pros['notConnected'].replace('{0}', pros['appName']))
         self.systemProxyMenu.setDisabledProxy()

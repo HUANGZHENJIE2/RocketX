@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QMessageBox
 from application import Application
 
 if __name__ == '__main__':
-    debug = True
+    debug = False
     if debug:
         app = Application()
         app.run()
