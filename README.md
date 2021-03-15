@@ -3,5 +3,5 @@
 ☞支持多種協議的代理中間件
 
 ## Introduction - 介绍
-小火箭是可以运行在Windows 平台的一个代理客户端，VMESS、VLESS、Trojan、socks5、ssr、ss、等主流代理协议。
+小火箭是可以运行在Windows 平台的一个代理客户端，VMESS、VLESS、Trojan、SOcket、ssr、ss、等主流代理协议。
 MAC OS 将在下一个版本支持。
