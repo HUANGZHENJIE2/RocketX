@@ -11,6 +11,6 @@ MAC OS 将在下一个版本支持。使用过程中遇到任何欢迎提交反�
 ### v1.1 
 实现了主干功能
 ## 鸣谢
-xray
-sysproxy
+[xray-core](https://github.com/XTLS/Xray-core)  
+[sysproxy](https://github.com/Noisyfox/sysproxy)  
 
