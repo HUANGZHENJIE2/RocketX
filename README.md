@@ -2,6 +2,15 @@
 # 小火箭VPN客戶端
 ☞支持多種協議的代理中間件
 
-## Introduction - 介绍
-小火箭是可以运行在Windows 平台的一个代理客户端，VMESS、VLESS、Trojan、SOcket、ssr、ss、等主流代理协议。
+## 介绍
+小火箭是可以运行在Windows 平台的一个代理客户端，VMESS、VLESS、Trojan、SOCKET、Shadowscoks等主流代理协议。
 MAC OS 将在下一个版本支持。
+## 更新日志
+### v1.2 
+修复菜单错误
+### v1.1 
+实现了主干功能
+## 鸣谢
+xray
+sysproxy
+
