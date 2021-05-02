@@ -7,7 +7,7 @@ tasks = {
             "mv .packages/** dist/"
         ]
     },
-    "run": {klkkghgggfddssa `    
+    "run": {
         "cmds": [
             "py main.py"
         ]

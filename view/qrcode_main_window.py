@@ -2,7 +2,7 @@ from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout
 
-from resources import Resources
+from utils.resources import Resources
 from .ui_about import Ui_AboutWindow
 from .ui_qrcode import Ui_QRCodeMainWindow
 import qrcode

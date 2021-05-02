@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout
 
-from resources import Resources
+from utils.resources import Resources
 from view.ui_feedback import Ui_Feedback
 
 

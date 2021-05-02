@@ -1,8 +1,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMenu
 
-import utils
-from resources import Resources
+from utils.utils import read_text_file
+from utils.resources import Resources
 
 
 class HelpMenu(QMenu):
@@ -18,7 +18,7 @@ class HelpMenu(QMenu):
     def init(self):
 
         self.setStyleSheet(
-            utils.read_text_file(Resources.getResourcesPackagesPath('menu'))
+            read_text_file(Resources.getResourcesPackagesPath('menu'))
         )
         pros = self.app.strings.properties
         self.feedbackAction.setText(pros["feedback"])

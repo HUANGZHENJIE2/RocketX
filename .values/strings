@@ -1,4 +1,4 @@
-appName=Rocket X 测试版
+appName=Rocket X 居丽坤老师专用
 
 
 about.windowsTitle=About
@@ -94,3 +94,5 @@ deleteFailed=Can't delete it.\n无法删除。
 deleteConfirmation=Are you sure delete {server.remarks}.\n确定删除{server.remarks}
 
 resetSelectedIndex=Default server has been rest.\n已经重置默认服务器。
+
+connectAutomatically=Connect Automatically 自动连接

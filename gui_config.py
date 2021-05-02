@@ -1,6 +1,6 @@
 import json
 
-from resources import Resources
+from utils.resources import Resources
 
 
 class GuiConfig:

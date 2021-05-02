@@ -1,9 +1,9 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMenu
 
-import utils
-from resources import Resources
-import sysproxy
+from utils.utils import read_text_file
+from utils.resources import Resources
+from myos import sysproxy
 
 
 class SystemProxyMenu(QMenu):
@@ -20,7 +20,7 @@ class SystemProxyMenu(QMenu):
 
     def init(self):
         self.setStyleSheet(
-            utils.read_text_file(Resources.getResourcesPackagesPath('menu'))
+            read_text_file(Resources.getResourcesPackagesPath('menu'))
         )
 
         # 根据配置初始化菜单

@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from resources import Resources
+from utils.resources import Resources
 
 
 class Ui_AboutWindow(object):

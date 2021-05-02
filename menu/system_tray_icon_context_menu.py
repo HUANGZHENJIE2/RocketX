@@ -1,11 +1,11 @@
 from PyQt5.QtWidgets import QMenu, QMessageBox
 
-import utils
+from utils.utils import read_text_file
 from menu.help_menu import HelpMenu
 from menu.servers_menu import ServersMenu
 from menu.system_proxy_menu import SystemProxyMenu
-from resources import Resources
-import server
+from utils.resources import Resources
+from services import server
 import sys
 
 
@@ -23,6 +23,7 @@ class SystemTrayIconContextMenu(QMenu):
         self.pacAction = self.addAction("PAC")
         self.forwardProxyAction = self.addAction("Forward Proxy")
         self.addSeparator()
+        self.connectAutomaticallyAction = self.addAction("Connect Automatically")
         self.startBootAction = self.addAction("Start Boot")
         self.allowOtherDevicesToConnectAction = self.addAction("Allow other Devices to connect")
         self.addSeparator()
@@ -35,15 +36,18 @@ class SystemTrayIconContextMenu(QMenu):
 
     def init(self):
         self.setStyleSheet(
-            utils.read_text_file(Resources.getResourcesPackagesPath('menu'))
+            read_text_file(Resources.getResourcesPackagesPath('menu'))
         )
 
         pros = self.app.strings.properties
 
         # 根据配置初始化菜单
         self.setStartBoot()
+        self.setConnectAutomatically()
         self.setAllowOtherDevicesToConnect()
-        if self.app.guiConfig.guiConfig['settings']['connectAutomatically']:
+
+        connectAutomatically = self.guiConfig.guiConfig['settings']['connectAutomatically']
+        if connectAutomatically:
             self.app.guiConfig.writeNewJsonFile('forwardServer', 'config.json')
             self.connectServer()
 
@@ -58,6 +62,7 @@ class SystemTrayIconContextMenu(QMenu):
         self.pacAction.setText(pros['PAC'])
         self.serversAction.setText(pros['servers'])
         self.systemProxyAction.setText(pros['systemProxy'])
+        self.connectAutomaticallyAction.setText(pros['connectAutomatically'])
         self.exitAction.setText(pros['exit'])
 
         # 绑定菜单
@@ -66,6 +71,7 @@ class SystemTrayIconContextMenu(QMenu):
         self.serversAction.setMenu(self.serversMenu)
 
         # 绑定信槽
+        self.connectAutomaticallyAction.triggered.connect(self.connectAutomaticallyActionTriggered)
         self.startBootAction.triggered.connect(self.startBootActionTriggered)
         self.allowOtherDevicesToConnectAction.triggered.connect(self.allowOtherDevicesToConnectActionTriggered)
         self.connectAndDisconnectAction.triggered.connect(self.connectAndDisconnectActionTriggered)
@@ -75,6 +81,11 @@ class SystemTrayIconContextMenu(QMenu):
         self.serversMenu = ServersMenu(self.app)
         self.serversAction.setMenu(self.serversMenu)
         print("debug reloadServer")
+
+    def connectAutomaticallyActionTriggered(self):
+        self.guiConfig.guiConfig['settings']['connectAutomatically'] = not self.guiConfig.guiConfig['settings']['connectAutomatically']
+        self.guiConfig.write()
+        self.setConnectAutomatically()
 
     def startBootActionTriggered(self):
         self.guiConfig.guiConfig['settings']['startBoot'] = not self.guiConfig.guiConfig['settings']['startBoot']
@@ -120,6 +131,13 @@ class SystemTrayIconContextMenu(QMenu):
         self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_off_black_18dp.png'))
         self.app.systemTrayIcon.setToolTip(pros['notConnected'].replace('{0}', pros['appName']))
         self.systemProxyMenu.setDisabledProxy()
+
+    def setConnectAutomatically(self):
+        connectAutomatically = self.guiConfig.guiConfig['settings']['connectAutomatically']
+        if connectAutomatically:
+            self.connectAutomaticallyAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
+        else:
+            self.connectAutomaticallyAction.setIcon(Resources.getIconByFilename('hzj'))
 
     def setStartBoot(self):
         startBoot = self.guiConfig.guiConfig['settings']['startBoot']

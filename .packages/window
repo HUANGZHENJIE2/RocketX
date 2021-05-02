@@ -132,3 +132,6 @@ QListWidget::item:selected:!active
 QListWidget{
 	 border: 1px solid #B6B6B6;
 }
+QFrame{
+    border: none;
+}

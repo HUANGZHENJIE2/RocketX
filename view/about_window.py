@@ -1,8 +1,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout
 
-import utils
-from resources import Resources
+from utils.utils import read_text_file
+from utils.resources import Resources
 from .ui_about import Ui_AboutWindow
 
 
@@ -19,7 +19,7 @@ class AboutWindow(QMainWindow):
 
     def init(self):
         self.setStyleSheet(
-            utils.read_text_file(Resources.getResourcesPackagesPath('window'))
+            read_text_file(Resources.getResourcesPackagesPath('window'))
         )
 
     def closeEvent(self, event):

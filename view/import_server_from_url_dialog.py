@@ -4,8 +4,8 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QDialog
 
-import utils
-from resources import Resources
+from utils.utils import read_text_file
+from utils.resources import Resources
 from .ui_import_server_from_url import Ui_ImportServerFromURLDialog
 
 
@@ -22,7 +22,7 @@ class ImportServerFromURLDialog(QDialog):
     def init(self):
 
         self.setStyleSheet(
-            utils.read_text_file(Resources.getResourcesPackagesPath('window'))
+            read_text_file(Resources.getResourcesPackagesPath('window'))
         )
 
     def closeEvent(self, event):
