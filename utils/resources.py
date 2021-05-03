@@ -40,6 +40,13 @@ class Resources:
         return os.getcwd() + "/" + path
 
     @staticmethod
+    def getQPixmapByFilename2(filename, theme):
+        if sys.platform in 'win32':
+            return QPixmap(Resources.getResourcesPath(f"themes\\{theme}\\"+filename))
+        return QPixmap(Resources.getResourcesPath(f"themes/{theme}/" + filename))
+
+
+    @staticmethod
     def getQPixmapByFilename(filename):
         return QPixmap(Resources.getResourcesPath(filename))
 
