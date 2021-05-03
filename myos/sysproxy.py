@@ -1,9 +1,9 @@
 import ctypes
-import myos
 import subprocess
 import platform
 from utils.resources import Resources
 from myos import system
+import os
 
 def _start_forward_server_thread(cmd, status):
     system.call(cmd)
@@ -19,7 +19,11 @@ def setWebProxy(proxyServer, bypass: str):
         return
     if osname in 'Darwin':
         # TODO : MAC OS 系列适配
+        proxyServer = proxyServer.split(":")
+        cmd = f"networksetup -setwebproxy Wi-Fi {proxyServer[0]} {proxyServer[1]}\n"
+        cmd2 = f"networksetup -setproxybypassdomains Wi-Fi {bypass}"
         os.system(cmd)
+        os.system(cmd2)
         return
     if osname in 'Linux':
         # TODO : Linux 系列适配
@@ -41,6 +45,7 @@ def setAutoProxyUrl(url):
         return
     if osname in 'Darwin':
         # TODO : MAC OS 系列适配
+        cmd = f"networksetup -setautoproxyurl Wi-Fi {url}"
         os.system(cmd)
         return
     if osname in 'Linux':
@@ -60,6 +65,7 @@ def off():
         return
     if osname in 'Darwin':
         # TODO : MAC OS 系列适配
+        cmd = "networksetup -setwebproxystate Wi-Fi off"
         os.system(cmd)
         return
     if osname in 'Linux':

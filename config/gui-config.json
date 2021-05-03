@@ -4,7 +4,8 @@
     "startBoot": false,
     "allowOtherDevicesToConnect": true,
     "isConnected": true,
-    "connectAutomatically": true
+    "connectAutomatically": true,
+    "theme": "dark"
   },
   "pac": {
     "enable": true,
@@ -14,7 +15,7 @@
     "host": null
   },
   "systemProxy": {
-    "proxyMode": "PAC",
+    "proxyMode": "Global",
     "scriptAddress": "http://127.0.0.1:10811/proxy.pac",
     "proxyAddress": "127.0.0.1",
     "proxyPort": "10807",

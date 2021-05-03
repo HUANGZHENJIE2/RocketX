@@ -2,6 +2,13 @@ import platform
 import os
 import subprocess
 from utils.utils import write_text_file
+import _thread
+
+
+def _cmd(cmd, stutus):
+    cmd = cmd + "&"
+    print(f"Starting {cmd}")
+    os.system(cmd)
 
 
 def call(cmd):
@@ -13,7 +20,9 @@ def call(cmd):
         return
     if osname in 'Darwin':
         # TODO : MAC OS 系列适配
-        os.system(cmd)
+        _thread.start_new_thread(
+            _cmd, (cmd, 0)
+        )
         return
     if osname in 'Linux':
         # TODO : Linux 系列适配

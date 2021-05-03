@@ -49,7 +49,7 @@ def kill_forward_server():
         cmd = "taskkill /F /IM xray.exe"
 
     if osname in 'Darwin':
-        cmd = "kill -9 $(pidof xray)"
+        cmd = "killall -9 xray"
 
     if osname in 'Linux':
         cmd = "kill -9 $(pidof xray)"
