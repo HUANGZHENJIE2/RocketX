@@ -3,47 +3,42 @@ from PyQt5.QtGui import QIcon, QPixmap
 import sys
 import platform
 
+
+
 class Resources:
     @staticmethod
     def getBaseResourcesPath():
-        if sys.platform in 'win32':
-            return os.getcwd() + "\\resources"
-        return os.getcwd() + "/resources"
+        return os.path.join(os.getcwd(), "resources")
 
     @staticmethod
     def getLibPath(path):
-        osname = platform.system()
-        if sys.platform in 'win32':
-            return os.getcwd() + "\\lib\\" + osname + "\\" + path
-        return os.getcwd() + "/lib/" + osname + '/' + path
+        return os.path.join(os.getcwd(), "lib", platform.system(), path)
 
     @staticmethod
     def getResourcesPath(path):
-        if sys.platform in 'win32':
-            return Resources.getBaseResourcesPath() + "\\" + path
-        return Resources.getBaseResourcesPath() + "/" + path
+        return os.path.join(Resources.getBaseResourcesPath(), path)
+
+    @staticmethod
+    def getResourcesPathByTheme(theme, path):
+        return os.path.join(Resources.getBaseResourcesPath(), "themes", theme, path)
 
     @staticmethod
     def getResourcesPackagesPath(path):
-        if sys.platform in 'win32':
-            return os.getcwd() + "\\.packages\\" + path
-        return os.getcwd() + "/.packages/" + path
+        return os.path.join(os.getcwd(), ".packages", path)
 
     @staticmethod
     def getIconByFilename(filename):
         return QIcon(Resources.getResourcesPath(filename))
 
     @staticmethod
-    def getBasePath(path):
-        if sys.platform in 'win32':
-            return os.getcwd() + "\\" + path
-        return os.getcwd() + "/" + path
+    def getIconByThemeAndFilename(theme, filename):
+        print(Resources.getResourcesPathByTheme(theme, filename))
+        return QIcon(Resources.getResourcesPathByTheme(theme, filename))
 
     @staticmethod
-    def getQPixmapByFilename2(filename, theme):
-        if sys.platform in 'win32':
-            return QPixmap(Resources.getResourcesPath(f"themes\\{theme}\\"+filename))
-        return QPixmap(Resources.getResourcesPath(f"themes/{theme}/" + filename))
+    def getBasePath(path):
+        return os.path.join(os.getcwd(), path)
+
 
 
     @staticmethod
@@ -52,12 +47,10 @@ class Resources:
 
     @staticmethod
     def getConfigPath(path):
-        if sys.platform in 'win32':
-            return os.getcwd() + "\\config\\" + path
-        return os.getcwd() + "/config/" + path
+        return os.path.join(os.getcwd(), "config", path)
+
+
 
     @staticmethod
     def getValuesPath(path):
-        if sys.platform in 'win32':
-            return os.getcwd() + "\\.values\\" + path
-        return os.getcwd() + "/.values/" + path
+        return os.path.join(os.getcwd(), ".values", path)

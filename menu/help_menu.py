@@ -17,9 +17,11 @@ class HelpMenu(QMenu):
 
     def init(self):
 
+        theme = self.app.guiConfig.guiConfig['settings']['theme']
         self.setStyleSheet(
-            read_text_file(Resources.getResourcesPackagesPath('menu'))
+            read_text_file(Resources.getResourcesPathByTheme(theme, 'menu'))
         )
+
         pros = self.app.strings.properties
         self.feedbackAction.setText(pros["feedback"])
         self.aboutAction.setText(pros["about"])

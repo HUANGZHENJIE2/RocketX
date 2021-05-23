@@ -29,9 +29,15 @@ class ServersMenu(QMenu):
 
         self.init()
 
+        self.showServerQRCodeAction.triggered.connect(self.showServerQRCode)
+        self.editServersAction.triggered.connect(self.editServers)
+        self.importServerFromUrlAction.triggered.connect(self.importServerFromUrl)
+        self.copySelectedServerUrlAction.triggered.connect(self.copySelectedServerUrl)
+
     def init(self):
+        theme = self.app.guiConfig.guiConfig['settings']['theme']
         self.setStyleSheet(
-            read_text_file(Resources.getResourcesPackagesPath('menu'))
+            read_text_file(Resources.getResourcesPathByTheme(theme, 'menu'))
         )
 
         pros = self.app.strings.properties
@@ -39,7 +45,7 @@ class ServersMenu(QMenu):
         self.importServerFromUrlAction.setText(pros["importServerFromUrl"])
         self.copySelectedServerUrlAction.setText(pros["copySelectedServerUrlAction"])
         self.showServerQRCodeAction.setText(pros["showServerQRCode"])
-
+        theme = self.app.guiConfig.guiConfig['settings']['theme']
         if len(self.app.guiConfig.guiConfig['serverList']) > 0:
             if self.app.guiConfig.guiConfig['settings']['selectedServerIndex'] > \
                     (len(self.app.guiConfig.guiConfig['serverList']) - 1):
@@ -50,21 +56,19 @@ class ServersMenu(QMenu):
                 self.setServer(self.app.guiConfig.guiConfig['settings']['selectedServerIndex'])
                 self.app.systemTrayIconContextMenu.connectServer()
             self.serverActions[self.app.guiConfig.guiConfig['settings']['selectedServerIndex']] \
-                .setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
+                .setIcon(Resources.getIconByThemeAndFilename(theme, "selected.png"))
 
         self.editServersAction.setIcon(Resources.getIconByFilename('none_black_18dp.png'))
 
-        self.showServerQRCodeAction.triggered.connect(self.showServerQRCode)
-        self.editServersAction.triggered.connect(self.editServers)
-        self.importServerFromUrlAction.triggered.connect(self.importServerFromUrl)
-        self.copySelectedServerUrlAction.triggered.connect(self.copySelectedServerUrl)
+
 
     def setServer(self, index):
+        theme = self.app.guiConfig.guiConfig['settings']['theme']
         self.serverActions[self.app.guiConfig.guiConfig['settings']['selectedServerIndex']] \
-            .setIcon(Resources.getIconByFilename(''))
+            .setIcon(Resources.getIconByFilename('none_black_18dp.png'))
         self.app.guiConfig.guiConfig['settings']['selectedServerIndex'] = index
         self.serverActions[self.app.guiConfig.guiConfig['settings']['selectedServerIndex']] \
-            .setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
+            .setIcon(Resources.getIconByThemeAndFilename(theme, "selected.png"))
         self.app.guiConfig.write()
         self.app.guiConfig.guiConfig['forwardServer']['outbounds'][0] = self.getOutbound()
         self.app.guiConfig.write()

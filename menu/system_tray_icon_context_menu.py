@@ -4,6 +4,7 @@ from utils.utils import read_text_file
 from menu.help_menu import HelpMenu
 from menu.servers_menu import ServersMenu
 from menu.system_proxy_menu import SystemProxyMenu
+from menu.theme_menu import ThemeMenu
 from utils.resources import Resources
 from services import server
 import sys
@@ -27,16 +28,33 @@ class SystemTrayIconContextMenu(QMenu):
         self.startBootAction = self.addAction("Start Boot")
         self.allowOtherDevicesToConnectAction = self.addAction("Allow other Devices to connect")
         self.addSeparator()
+        self.themeAction = self.addAction("Theme")
         self.helpMenu = HelpMenu(self.app)
+        self.themeMenu = ThemeMenu(self.app)
         self.helpAction = self.addAction("Help")
         self.exitAction = self.addAction("Exit")
         self.isConnected = False
 
         self.init()
 
+        # 绑定菜单
+        self.helpAction.setMenu(self.helpMenu)
+        self.systemProxyAction.setMenu(self.systemProxyMenu)
+        self.serversAction.setMenu(self.serversMenu)
+        self.themeAction.setMenu(self.themeMenu)
+
+        # 绑定信槽
+        self.connectAutomaticallyAction.triggered.connect(self.connectAutomaticallyActionTriggered)
+        self.startBootAction.triggered.connect(self.startBootActionTriggered)
+        self.allowOtherDevicesToConnectAction.triggered.connect(self.allowOtherDevicesToConnectActionTriggered)
+        self.connectAndDisconnectAction.triggered.connect(self.connectAndDisconnectActionTriggered)
+        self.exitAction.triggered.connect(self.exit)
+
     def init(self):
+        print("init() .....................")
+        theme = self.guiConfig.guiConfig['settings']['theme']
         self.setStyleSheet(
-            read_text_file(Resources.getResourcesPackagesPath('menu'))
+            read_text_file(Resources.getResourcesPathByTheme(theme, 'menu'))
         )
 
         pros = self.app.strings.properties
@@ -63,19 +81,10 @@ class SystemTrayIconContextMenu(QMenu):
         self.serversAction.setText(pros['servers'])
         self.systemProxyAction.setText(pros['systemProxy'])
         self.connectAutomaticallyAction.setText(pros['connectAutomatically'])
+        self.themeAction.setText(pros['theme'])
         self.exitAction.setText(pros['exit'])
 
-        # 绑定菜单
-        self.helpAction.setMenu(self.helpMenu)
-        self.systemProxyAction.setMenu(self.systemProxyMenu)
-        self.serversAction.setMenu(self.serversMenu)
 
-        # 绑定信槽
-        self.connectAutomaticallyAction.triggered.connect(self.connectAutomaticallyActionTriggered)
-        self.startBootAction.triggered.connect(self.startBootActionTriggered)
-        self.allowOtherDevicesToConnectAction.triggered.connect(self.allowOtherDevicesToConnectActionTriggered)
-        self.connectAndDisconnectAction.triggered.connect(self.connectAndDisconnectActionTriggered)
-        self.exitAction.triggered.connect(self.exit)
 
     def reloadServer(self):
         self.serversMenu = ServersMenu(self.app)
@@ -105,6 +114,7 @@ class SystemTrayIconContextMenu(QMenu):
             self.connectServer()
 
     def connectServer(self):
+        theme = self.guiConfig.guiConfig['settings']['theme']
         pros = self.app.strings.properties
         if len(self.app.guiConfig.guiConfig['serverList']) == 0:
             self.informationBox(pros['connect'], pros['connectFailed'])
@@ -113,7 +123,7 @@ class SystemTrayIconContextMenu(QMenu):
         server.start_forward_server()
         self.isConnected = True
         self.connectAndDisconnectAction.setText(pros['disconnect'])
-        self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_black_18dp.png'))
+        self.app.systemTrayIcon.setIcon(Resources.getIconByThemeAndFilename(theme, 'public.png'))
         self.app.systemTrayIcon.setToolTip(pros['connected'].replace(
             '{0}',
             self.guiConfig.guiConfig["serverList"][self.guiConfig.guiConfig['settings']['selectedServerIndex']][
@@ -124,35 +134,39 @@ class SystemTrayIconContextMenu(QMenu):
         self.systemProxyMenu.setEnabledProxy()
 
     def disconnectServer(self):
+        theme = self.guiConfig.guiConfig['settings']['theme']
         pros = self.app.strings.properties
         server.kill_forward_server()
         self.isConnected = False
         self.connectAndDisconnectAction.setText(pros['connect'])
-        self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_off_black_18dp.png'))
+        self.app.systemTrayIcon.setIcon(Resources.getIconByThemeAndFilename(theme, 'public_off.png'))
         self.app.systemTrayIcon.setToolTip(pros['notConnected'].replace('{0}', pros['appName']))
         self.systemProxyMenu.setDisabledProxy()
 
     def setConnectAutomatically(self):
+        theme = self.guiConfig.guiConfig['settings']['theme']
         connectAutomatically = self.guiConfig.guiConfig['settings']['connectAutomatically']
         if connectAutomatically:
-            self.connectAutomaticallyAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
+            self.connectAutomaticallyAction.setIcon(Resources.getIconByThemeAndFilename(theme, "selected.png"))
         else:
-            self.connectAutomaticallyAction.setIcon(Resources.getIconByFilename('hzj'))
+            self.connectAutomaticallyAction.setIcon(Resources.getIconByFilename('none_black_18dp.png'))
 
     def setStartBoot(self):
+        theme = self.guiConfig.guiConfig['settings']['theme']
         startBoot = self.guiConfig.guiConfig['settings']['startBoot']
         if startBoot:
-            self.startBootAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
+            self.startBootAction.setIcon(Resources.getIconByThemeAndFilename(theme, "selected.png"))
         else:
-            self.startBootAction.setIcon(Resources.getIconByFilename('hzj'))
+            self.startBootAction.setIcon(Resources.getIconByFilename('none_black_18dp.png'))
 
     def setAllowOtherDevicesToConnect(self):
+        theme = self.guiConfig.guiConfig['settings']['theme']
         allowOtherDevicesToConnect = self.guiConfig.guiConfig['settings']['allowOtherDevicesToConnect']
 
         if allowOtherDevicesToConnect:
-            self.allowOtherDevicesToConnectAction.setIcon(Resources.getIconByFilename('baseline_check_black_18dp.png'))
+            self.allowOtherDevicesToConnectAction.setIcon(Resources.getIconByThemeAndFilename(theme, "selected.png"))
         else:
-            self.allowOtherDevicesToConnectAction.setIcon(Resources.getIconByFilename('hzj'))
+            self.allowOtherDevicesToConnectAction.setIcon(Resources.getIconByFilename('none_black_18dp.png'))
 
     def setConnectAndDisconnectAction(self):
         if self.guiConfig.guiConfig['settings']['isConnected']:
@@ -161,11 +175,12 @@ class SystemTrayIconContextMenu(QMenu):
             self.connectAndDisconnectAction.setText("Connect")
 
     def setSystemTrayIconAndToolTip(self):
+        theme = self.guiConfig.guiConfig['settings']['theme']
         if self.guiConfig.guiConfig['settings']['isConnected']:
-            self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_black_18dp.png'))
+            self.app.systemTrayIcon.setIcon(Resources.getIconByThemeAndFilename(theme, 'public.png'))
             self.app.systemTrayIcon.setToolTip("Connected -Rocket X")
         else:
-            self.app.systemTrayIcon.setIcon(Resources.getIconByFilename('baseline_public_off_black_18dp.png'))
+            self.app.systemTrayIcon.setIcon(Resources.getIconByThemeAndFilename(theme, 'public_off.png'))
             self.app.systemTrayIcon.setToolTip("Not connect -Rocket X")
 
     def exit(self):

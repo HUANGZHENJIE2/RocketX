@@ -1,12 +1,12 @@
-appName=Rocket X 居丽坤老师专用
+appName=Rocket X
 
 
 about.windowsTitle=About
 about.appName=Rocket X Beta
-about.version=Version 1.1.1.210219_beta  (64-bit)
+about.version=Version 3.1.1.210517_beta  (64-bit)
 about.description=This application is made possible by the <a href="https://github.com/XTLS/Xray-core">Xray</a> open source project and other <a href="https://github.com/HUANGZHENJIE2/RocketX">open source software</a>.
 about.copyright=Rocket X\n © 2021 HUANG ZHENJIE. All rights reserved.
-about.checkUpdate=檢查更新
+about.checkUpdate=检查更新
 
 help=Help 帮助
 allowOtherDevicesToConnectAction=Allow other Devices to connect 允许其他设备连接
@@ -15,6 +15,11 @@ forwardProxy=Forward Proxy 转发服务器
 PAC=PAC
 servers=Servers 服务器
 systemProxy=System Proxy 系统代理
+
+theme=Theme 主题
+
+light=Light 亮
+dark=Dark 暗
 
 feedback=Feedback 反馈
 about=About 关于

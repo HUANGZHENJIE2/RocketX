@@ -41,3 +41,11 @@ class Application:
         self.systemTrayIcon.show()
         sys.exit(self.app.exec_())
         pass
+
+    def refresh(self):
+        self.systemTrayIconContextMenu.init()
+        self.systemTrayIconContextMenu.themeMenu.init()
+        self.systemTrayIconContextMenu.systemProxyMenu.init()
+        self.systemTrayIconContextMenu.serversMenu.init()
+        self.systemTrayIconContextMenu.helpMenu.init()
+
